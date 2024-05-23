@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Listeners\AuthLogListener;
+use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
@@ -12,7 +15,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // Redirect Authenticated Users
+        RedirectIfAuthenticated::redirectUsing(function () {
+            return route('dashboard');
+        });
     }
 
     /**
@@ -20,6 +26,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // AuthLog Listener
+        Event::subscribe(AuthLogListener::class);
         // Implicitly grant "SUPER USER" role all permissions
         // This works in the app by using gate-related functions like auth()->user->can() and @can()
         Gate::before(function ($user, $ability) {
