@@ -13,7 +13,13 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'WebMan'),
+    'app_dev_name' => env('APP_DEV_NAME', 'AlgoPacific'),
+    'app_dev_url' => env('APP_DEV_URL', 'https://algopacific.com'),
+    'app_version' => env('APP_VERSION', '1.0.0'),
+    'app_desc' => env('APP_DESC', 'Web-site/Web-App Management Console'),
+    'app_kw' => env('APP_KW', 'management console, admin panel'),
+    'app_display_timezone' => env('APP_DISPLAY_TIMEZONE', 'Asia/Kolkata'),
 
     /*
     |--------------------------------------------------------------------------
