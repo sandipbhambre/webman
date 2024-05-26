@@ -6,16 +6,21 @@ use App\Traits\GenerateAppLog;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\Permission\Models\Role as ModelsRole;
 
-class Role extends ModelsRole
+class Menu extends Model
 {
     use HasFactory, GenerateAppLog;
 
     protected $fillable = [
-        'name',
-        'guard_name',
-        'is_active'
+        "title",
+        "sub_title",
+        "icon",
+        "sub_icon",
+        "order",
+        "sub_order",
+        "route",
+        "permissions",
+        "is_active",
     ];
 
     public function scopeActive(Builder $builder): void

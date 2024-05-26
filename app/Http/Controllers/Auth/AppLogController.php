@@ -3,20 +3,20 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\AuthLog;
+use App\Models\AppLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
-class AuthLogController extends Controller
+class AppLogController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        Gate::authorize("READ_AUTH_LOG");
+        Gate::authorize("READ_APP_LOG");
         $flashData = collect([]);
-        $query = AuthLog::query();
+        $query = AppLog::query();
         // SEARCH
         if ($request->has('search') && $request->search !== null) {
             $query->where(
@@ -24,7 +24,11 @@ class AuthLogController extends Controller
                 'LIKE',
                 '%' . $request->search . '%',
             )->orWhere(
-                    'email',
+                    'model',
+                    'LIKE',
+                    '%' . $request->search . '%',
+                )->orWhere(
+                    'operation',
                     'LIKE',
                     '%' . $request->search . '%',
                 )->orWhere(
@@ -39,9 +43,9 @@ class AuthLogController extends Controller
             $query->orderBy($request->sortBy);
             $flashData->push('sortBy');
         }
-        $authLogList = $query->latest()->paginate($request->numberOfRecords ? $request->numberOfRecords : 10)->withQueryString();
+        $appLogList = $query->latest()->paginate($request->numberOfRecords ? $request->numberOfRecords : 10)->withQueryString();
         $request->flashOnly($flashData->toArray());
-        return view("auth-logs.index", ["authLogList" => $authLogList]);
+        return view("app-logs.index", ["appLogList" => $appLogList]);
     }
 
     /**
@@ -63,14 +67,14 @@ class AuthLogController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(AuthLog $authLog)
+    public function show(AppLog $appLog)
     {
-        Gate::authorize("READ_AUTH_LOG");
+        Gate::authorize("READ_APP_LOG");
         return response()->json([
             "status" => "success",
             "statusCode" => 200,
             "data" => [
-                "authLog" => $authLog,
+                "appLog" => $appLog,
             ],
             "message" => null,
         ], 200);
@@ -79,7 +83,7 @@ class AuthLogController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(AuthLog $authLog)
+    public function edit(AppLog $appLog)
     {
         //
     }
@@ -87,7 +91,7 @@ class AuthLogController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, AuthLog $authLog)
+    public function update(Request $request, AppLog $appLog)
     {
         //
     }
@@ -95,7 +99,7 @@ class AuthLogController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(AuthLog $authLog)
+    public function destroy(AppLog $appLog)
     {
         //
     }

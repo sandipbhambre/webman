@@ -3,22 +3,24 @@ let selectAllFoot = document.querySelector("#selectAllFoot");
 let selectOne = document.querySelectorAll("[id*='selectOne']");
 let csrfToken = document.querySelector("meta[name='csrf-token']").content;
 
-selectAllHead.addEventListener("change", function (event) {
-    let newCheckboxState = event.target.checked;
-    selectAllFoot.checked = newCheckboxState;
-    selectOne.forEach((el) => (el.checked = newCheckboxState));
-});
-selectAllFoot.addEventListener("change", function (event) {
-    let newCheckboxState = event.target.checked;
-    selectAllHead.checked = newCheckboxState;
-    selectOne.forEach((el) => (el.checked = newCheckboxState));
-});
-selectOne.forEach((el) =>
-    el.addEventListener("change", function (event) {
-        selectAllHead.checked = false;
-        selectAllFoot.checked = false;
-    })
-);
+if (selectAllHead && selectAllFoot && selectOne) {
+    selectAllHead.addEventListener("change", function (event) {
+        let newCheckboxState = event.target.checked;
+        selectAllFoot.checked = newCheckboxState;
+        selectOne.forEach((el) => (el.checked = newCheckboxState));
+    });
+    selectAllFoot.addEventListener("change", function (event) {
+        let newCheckboxState = event.target.checked;
+        selectAllHead.checked = newCheckboxState;
+        selectOne.forEach((el) => (el.checked = newCheckboxState));
+    });
+    selectOne.forEach((el) =>
+        el.addEventListener("change", function (event) {
+            selectAllHead.checked = false;
+            selectAllFoot.checked = false;
+        })
+    );
+}
 
 function getSelectedItems() {
     let selectedItems = [];

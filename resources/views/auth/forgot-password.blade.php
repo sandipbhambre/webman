@@ -63,7 +63,7 @@
                         <a href="{{ route('login') }}">Login</a>
                     </p>
                     <p class="mb-0">
-                        <a href="{{ config('app.dev_url') }}" class="text-center">Contact Us</a>
+                        <a href="{{ config('app.app_dev_url') }}" class="text-center">Contact Us</a>
                     </p>
                 </div>
             </div>

@@ -1,3 +1,7 @@
+@php
+    $sideBarMenus = \App\Models\Menu::active()->orderBy('order')->orderBy('sub_order')->get()->groupBy('order');
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,21 +12,21 @@
 
     <!-- Primary Meta Tags -->
     <meta name="title" content="{{ config('app.name') }} | @yield('page_title')" />
-    <meta name="description" content="{{ config('app.desc') }}" />
-    <meta name="keywords" content="{{ config('app.keywords') }}">
+    <meta name="description" content="{{ config('app.app_desc') }}" />
+    <meta name="keywords" content="{{ config('app.app_kw') }}">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ config('app.url') }}" />
     <meta property="og:title" content="{{ config('app.name') }} | @yield('page_title')" />
-    <meta property="og:description" content="{{ config('app.desc') }}" />
+    <meta property="og:description" content="{{ config('app.app_desc') }}" />
     <meta property="og:image" content="{{ asset('assets/images/WebMan_512.png') }}" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="{{ config('app.url') }}" />
     <meta property="twitter:title" content="{{ config('app.name') }} | @yield('page_title')" />
-    <meta property="twitter:description" content="{{ config('app.desc') }}" />
+    <meta property="twitter:description" content="{{ config('app.app_desc') }}" />
     <meta property="twitter:image" content="{{ asset('assets/images/WebMan_512.png') }}" />
     <!-- Meta Tags Generated with https://metatags.io -->
 
@@ -161,6 +165,60 @@
                         data-accordion="false">
                         <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
+                        @foreach ($sideBarMenus as $sideBarMenu)
+                            @if ($sideBarMenu->count() > 1)
+                                @php
+                                    $currentMenuRoutes = collect([]);
+                                    $currentMenuPermissions = collect([]);
+                                    $sideBarMenu->each(function ($el) use (
+                                        $currentMenuRoutes,
+                                        $currentMenuPermissions,
+                                    ) {
+                                        $currentMenuRoutes->push($el->route);
+                                        $currentMenuPermissions->push(Str::of($el->permissions)->split('/[\s,]+/'));
+                                    });
+                                    $currentMenuPermissions = $currentMenuPermissions->collapse(
+                                        $currentMenuPermissions,
+                                    );
+                                @endphp
+                                <li class="nav-item @if ($currentMenuRoutes->contains(Route::currentRouteName())) menu-open @endif">
+                                    <a href="#"
+                                        class="nav-link @if ($currentMenuRoutes->contains(Route::currentRouteName())) active @endif">
+                                        <i class="nav-icon {{ $sideBarMenu[0]->icon }}"></i>
+                                        <p>
+                                            {{ $sideBarMenu[0]->title }}
+                                            <i class="right fas fa-angle-left"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        @foreach ($sideBarMenu as $sm)
+                                            @can($sm->permissions ? Str::of($sm->permissions)->split('/[\s,]+/') : [])
+                                                <li class="nav-item">
+                                                    <a href="{{ route($sm->route) }}"
+                                                        class="nav-link @if (Route::currentRouteName() === $sm->route) active @endif">
+                                                        <i class="nav-icon {{ $sm->sub_icon }}"></i>
+                                                        <p>{{ $sm->sub_title }}</p>
+                                                    </a>
+                                                </li>
+                                            @endcan
+                                        @endforeach
+                                    </ul>
+                                </li>
+                            @else
+                                @can($sideBarMenu[0]->permissions ?
+                                    Str::of($sideBarMenu[0]->permissions)->split('/[\s,]+/') : [])
+                                    <li class="nav-item">
+                                        <a href="{{ route($sideBarMenu[0]->route) }}"
+                                            class="nav-link @if (Route::currentRouteName() === $sideBarMenu[0]->route) active @endif">
+                                            <i class="nav-icon {{ $sideBarMenu[0]->icon }}"></i>
+                                            <p>
+                                                {{ $sideBarMenu[0]->title }}
+                                            </p>
+                                        </a>
+                                    </li>
+                                @endcan
+                            @endif
+                        @endforeach
                     </ul>
                 </nav>
                 <!-- /.sidebar-menu -->
@@ -198,10 +256,10 @@
         <!-- Main Footer -->
         <footer class="main-footer">
             <strong>Copyright &copy; {{ now()->format('Y') }} <a
-                    href="{{ config('app.dev_url') }}">{{ config('app.dev_name') }}</a>.</strong>
+                    href="{{ config('app.app_dev_url') }}">{{ config('app.app_dev_name') }}</a>.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
-                <b>Version</b> {{ config('app.version') }}
+                <b>Version</b> {{ config('app.app_version') }}
             </div>
         </footer>
     </div>

@@ -15,11 +15,97 @@ namespace App\Models{
 /**
  * 
  *
+ * @property int $id
+ * @property string $model
+ * @property int $model_id
+ * @property string $operation
+ * @property string|null $data
+ * @property string $ip_address
+ * @property string|null $username
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|AppLog newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|AppLog newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|AppLog query()
+ * @method static \Illuminate\Database\Eloquent\Builder|AppLog whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AppLog whereData($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AppLog whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AppLog whereIpAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AppLog whereModel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AppLog whereModelId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AppLog whereOperation($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AppLog whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AppLog whereUsername($value)
+ */
+	class AppLog extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property int|null $user_id
+ * @property string $ip_address
+ * @property string $user_agent
+ * @property string|null $email
+ * @property string|null $username
+ * @property string|null $mobile_number
+ * @property string $action
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Illuminate\Database\Eloquent\Builder|AuthLog newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|AuthLog newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|AuthLog query()
+ * @method static \Illuminate\Database\Eloquent\Builder|AuthLog whereAction($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AuthLog whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AuthLog whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AuthLog whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AuthLog whereIpAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AuthLog whereMobileNumber($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AuthLog whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AuthLog whereUserAgent($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AuthLog whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|AuthLog whereUsername($value)
  */
 	class AuthLog extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property string $title
+ * @property string|null $sub_title
+ * @property string $icon
+ * @property string|null $sub_icon
+ * @property int $order
+ * @property int|null $sub_order
+ * @property string $route
+ * @property string|null $permissions
+ * @property int $is_active
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu active()
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu inactive()
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereIcon($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereIsActive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereOrder($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu wherePermissions($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereRoute($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereSubIcon($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereSubOrder($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereSubTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Menu whereUpdatedAt($value)
+ */
+	class Menu extends \Eloquent {}
 }
 
 namespace App\Models{

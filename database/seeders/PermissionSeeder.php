@@ -43,5 +43,17 @@ class PermissionSeeder extends Seeder
         Permission::create(['name' => 'BULK_UPDATE_PERMISSION', 'operation' => 'BULK_UPDATE', 'model' => 'PERMISSION']);
         Permission::create(['name' => 'BULK_DELETE_PERMISSION', 'operation' => 'BULK_DELETE', 'model' => 'PERMISSION']);
 
+        // MENU
+        Permission::create(['name' => 'CREATE_MENU', 'operation' => 'CREATE', 'model' => 'MENU']);
+        Permission::create(['name' => 'READ_MENU', 'operation' => 'READ', 'model' => 'MENU']);
+        Permission::create(['name' => 'UPDATE_MENU', 'operation' => 'UPDATE', 'model' => 'MENU']);
+        Permission::create(['name' => 'DELETE_MENU', 'operation' => 'DELETE', 'model' => 'MENU']);
+        Permission::create(['name' => 'IMPORT_MENU', 'operation' => 'IMPORT', 'model' => 'MENU']);
+        Permission::create(['name' => 'EXPORT_MENU', 'operation' => 'EXPORT', 'model' => 'MENU']);
+        Permission::create(['name' => 'BULK_UPDATE_MENU', 'operation' => 'BULK_UPDATE', 'model' => 'MENU']);
+        Permission::create(['name' => 'BULK_DELETE_MENU', 'operation' => 'BULK_DELETE', 'model' => 'MENU']);
+
+        Permission::create(['name' => 'READ_AUTH_LOG', 'operation' => 'READ', 'model' => 'AUTH_LOG', 'is_crud' => false]);
+        Permission::create(['name' => 'READ_APP_LOG', 'operation' => 'READ', 'model' => 'APP_LOG', 'is_crud' => false]);
     }
 }

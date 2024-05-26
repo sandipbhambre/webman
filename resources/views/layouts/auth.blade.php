@@ -16,21 +16,21 @@
 
     <!-- Primary Meta Tags -->
     <meta name="title" content="{{ config('app.name') }} | @yield('page_title')" />
-    <meta name="description" content="{{ config('app.desc') }}" />
-    <meta name="keywords" content="{{ config('app.keywords') }}">
+    <meta name="description" content="{{ config('app.app_desc') }}" />
+    <meta name="keywords" content="{{ config('app.app_kw') }}">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="{{ config('app.url') }}" />
     <meta property="og:title" content="{{ config('app.name') }} | @yield('page_title')" />
-    <meta property="og:description" content="{{ config('app.desc') }}" />
+    <meta property="og:description" content="{{ config('app.app_desc') }}" />
     <meta property="og:image" content="{{ asset('assets/images/WebMan_512.png') }}" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content="{{ config('app.url') }}" />
     <meta property="twitter:title" content="{{ config('app.name') }} | @yield('page_title')" />
-    <meta property="twitter:description" content="{{ config('app.desc') }}" />
+    <meta property="twitter:description" content="{{ config('app.app_desc') }}" />
     <meta property="twitter:image" content="{{ asset('assets/images/WebMan_512.png') }}" />
     <!-- Meta Tags Generated with https://metatags.io -->
 

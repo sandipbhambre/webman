@@ -39,6 +39,12 @@ class RoleSeeder extends Seeder
             'BULK_DELETE_ROLE',
 
             'READ_PERMISSION',
+
+            'READ_MENU',
+            'UPDATE_MENU',
+
+            'READ_AUTH_LOG',
+            'READ_APP_LOG',
         ]));
 
         $admin->givePermissionTo(([
@@ -54,6 +60,12 @@ class RoleSeeder extends Seeder
             'READ_ROLE',
 
             'READ_PERMISSION',
+
+            'READ_MENU',
+            'UPDATE_MENU',
+
+            'READ_AUTH_LOG',
+            'READ_APP_LOG',
         ]));
 
         $manager->givePermissionTo(([
@@ -65,6 +77,9 @@ class RoleSeeder extends Seeder
             'READ_ROLE',
 
             'READ_PERMISSION',
+
+            'READ_MENU',
+            'UPDATE_MENU',
         ]));
 
         $executive->givePermissionTo(([
