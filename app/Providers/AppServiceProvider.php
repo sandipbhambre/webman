@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Listeners\AuthLogListener;
 use Illuminate\Auth\Middleware\RedirectIfAuthenticated;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
@@ -22,6 +23,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Block Destructive Actions in Production
+        DB::prohibitDestructiveCommands(app()->isProduction());
         // Redirect Authenticated Users
         RedirectIfAuthenticated::redirectUsing(function () {
             return route('dashboard');
